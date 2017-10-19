@@ -11,7 +11,7 @@ using std::endl;
 
 class Matrix {
 public:
-	Matrix(double const  &m): matrix(m) {}
+	Matrix(double **m) {matrix = m;}
 
 	double element(int i, int j) {return matrix[i][j];}
 	void change(int i, int j,double newValue) {matrix[i][j] =newValue;}
@@ -22,7 +22,7 @@ public:
 		if (dim==1)
 			return m[0][0];
 		else if  (dim==2)
-			return mtx[0][0]*mtx[1][1])-mtx[0][1]*mtx[1][0];
+			return mtx[0][0]*mtx[1][1]-mtx[0][1]*mtx[1][0];
 		else {
 			for( int i=0; i<dim;i++) {
 				for(int j =1;j<dim;j++) {
@@ -44,7 +44,7 @@ public:
 	
 private:
 	int dim;
-	double matrix[99][99]; 
+	double **matrix; 
 };
 
 int main()
@@ -57,7 +57,7 @@ int main()
 		for(int j=0;j<n;j++)
 			cin>m[i][j];
 	}
-	Matrix matrix(n,m[n][n]);
+	Matrix matrix(m[n][n]);
 	return matrix.dtmnt;
 }
 		
