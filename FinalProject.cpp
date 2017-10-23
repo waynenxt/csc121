@@ -9,49 +9,70 @@
 #include <memory>
 
 using namespace std;
-double dtmnt(int dim, vector<vector <double>> matrix) {
-                vector< vector<double> > t;
-                double d=0;
-                if (dim==1)
-                        return matrix[0][0];
-                else if  (dim==2)
-                        return matrix[0][0]*matrix[1][1]-matrix[0][1]*matrix[1][0];
-                else {
-                        for( int i=0;i<dim;i++) {
-                                for(int j =1;j<dim;j++) {
-                                        vector<double> row;
-                                        for (int k=0; k<dim ;k++) {
-                                                if (k==i)
-                                                        continue;
-                                                row.push_back(matrix[j][k]);
-                                        }
-                                        t.push_back(row);
-                                }
-                	if ((i%2)==0)
-                	d  += matrix[0][i]*dtmnt(dim-1, t);
-                	if ((i%2)==1)
-                	d -= matrix[0][i]*dtmnt(dim-1, t);
-                       }
-                }
-	        return d;
-        }
 
+void pp(vector<vector<double>> matrix){
+	int n = matrix.size();
+	cout << n << endl;
+	for (int i = 0; i < n; i++){
+		for (int j = 0; j < n; j++){
+			cout << matrix[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
 
-int main()
-{
-	cout <<"Enter dimension: " <<endl;
+void pp2(vector<double> row) {
+	int n = row.size();
+	cout << "row vec ";
+	for (int i = 0; i < n; i++)
+		cout << row[i];
+	cout << endl;
+}
+
+double dtmnt(vector<vector <double>> matrix) {
+	int dim = matrix.size();
+	double d = 0;
+	if (dim == 1)
+		return matrix[0][0];
+	//else if (dim == 2)
+	//	return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+	else {
+		for (int i = 0; i<dim; i++) {
+			vector< vector<double> > t;
+			for (int j = 1; j<dim; j++) {
+				vector<double> row;
+				for (int k = 0; k<dim; k++) {
+					if (k != i) row.push_back(matrix[j][k]);
+				}
+				pp2(row);
+				t.push_back(row);
+			}
+			cout << "column " << i << endl;
+			pp(t);
+			if ((i % 2) == 0)
+				d += matrix[0][i] * dtmnt(t);
+			if ((i % 2) == 1)
+				d -= matrix[0][i] * dtmnt(t);
+		}
+	}
+	return d;
+}
+
+int main() {
+	cout << "Enter dimension: " << endl;
 	int n;
-	cin>>n;
+	cin >> n;
 	vector < vector<double> > m;
-	for(int i=0;i<n;i++){
+	for (int i = 0; i<n; i++){
 		vector<double> row;
-		for(int j=0;j<n;j++){
+		for (int j = 0; j<n; j++){
 			double k;
-			cin >>k;
+			cin >> k;
 			row.push_back(k);
 		}
-		m.push_back(row);	
+		m.push_back(row);
 	}
-	cout << dtmnt(n,m)<<endl;
+	pp(m);
+	cout << dtmnt(m) << endl;
+	cin >> n;
 }
-	
