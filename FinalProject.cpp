@@ -44,11 +44,11 @@ double dtmnt(vector<vector <double>> matrix) {
 				for (int k = 0; k<dim; k++) {
 					if (k != i) row.push_back(matrix[j][k]);
 				}
-				pp2(row);
+				//pp2(row);
 				t.push_back(row);
 			}
 			cout << "column " << i << endl;
-			pp(t);
+			//pp(t);
 			if ((i % 2) == 0)
 				d += matrix[0][i] * dtmnt(t);
 			if ((i % 2) == 1)
