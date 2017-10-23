@@ -27,11 +27,11 @@ double dtmnt(int dim, vector<vector <double>> matrix) {
                                         }
                                         t.push_back(row);
                                 }
-                       }
                 	if ((i%2)==0)
                 	d  += matrix[0][i]*dtmnt(dim-1, t);
                 	if ((i%2)==1)
                 	d -= matrix[0][i]*dtmnt(dim-1, t);
+                       }
                 }
 	        return d;
         }
